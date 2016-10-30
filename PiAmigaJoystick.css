@@ -1,0 +1,105 @@
+body 
+{
+	color: white;
+	font-weight: bold;
+}
+#setup,#keyboardassignments,#connData
+{
+	width:20%;
+	text-align:center;
+	margin-top:20px;
+}
+.nav-buttons 
+{
+	position:relative;
+	clear:both;
+	height:180px;
+	width:180px;
+	margin:20px auto;
+}
+.vertical, .horizontal
+{
+	width:50px;
+	height:50px;
+	margin:5px;
+	position:absolute;
+}
+.prev {
+	top:59px;
+	left:11px;
+}
+.up 
+{
+	top:10px;
+	left:60px;
+}
+.down 
+{
+	bottom:12px;
+	left:60px;
+}
+.next 
+{
+	top:59px;
+	right:11px;
+}
+.fire {
+	left:100px;
+	position:absolute;
+	top:15px;
+}
+html 
+{ 
+	background: url(amiga.png) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#pinoutdiv
+{
+	position:absolute;
+	right:50px;
+}
+ul {
+  list-style-type: none;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #716d6d;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="PiAmigaJoystick.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="PiAmigaJoystick.js"></script>
+	</head>
+	<body>
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<p>Press new key for fire</p>
+			</div>
+		</div>
+		<div id=pinoutdiv>
+			<img src=pinout.png></img>
+		</div>
+		<div id=connData>
+			<input type=text id=kinput><input type=button value="Imposta" id=connBtn>
+		</div>
+		<div id=setup>
+			<ul>
+				<li>
+					<label for="pinfuoco">Button FIRE GPIO : </label>
+					<select id=pinfuoco active=0></select>
+				</li>
+				<li>
+					<label for="pinup">Joystick UP GPIO : </label>
+					<select id=pinup active=0></select>
+				</li>
+				<li>
+					<label for="pindown">Joystick DOWN GPIO : </label>
+					<select id=pindown active=0></select>
+				</li>
+				<li>
+					<label for="pinleft">Joystick LEFT GPIO : </label>
+					<select id=pinleft active=0></select>
+				</li>
+				<li>
+					<label for="pinright">Joystick RIGHT GPIO : </label>
+					<select id=pinright active=0></select>
+				</li>
+			</ul>
+		</div>
+		<div id=keyboardassignments>
+			<ul>
+				<li>
+					<label for="keyboardFireBtn">Keyboard FIRE button: </label>
+					<input type=button id=keyboardFireBtn value=Return keyCode=13>
+				</li>
+				<li>
+					<label for="keyboardLeftBtn">Keyboard LEFT button: </label>
+					<input type=button id=keyboardLeftBtn value=LEFT keyCode=37>
+				</li>
+				<li>
+					<label for="keyboardRightBtn">Keyboard RIGHT button: </label>
+					<input type=button id=keyboardRightBtn value=RIGHT keyCode=39>
+				</li>
+				<li>
+					<label for="keyboardUpBtn">Keyboard UP button: </label>
+					<input type=button id=keyboardUpBtn value=UP keyCode=38>
+				</li>
+				<li>
+					<label for="keyboardDownBtn">Keyboard DOWN button: </label>
+					<input type=button id=keyboardDownBtn value=DOWN keyCode=40>
+				</li>
+			</ul>
+		</div>
+		<div class=nav-buttons>
+			<a href="javascript:">
+				<canvas class=fire id=firecanvas></canvas>
+			</a>
+			<a class="horizontal prev" href="javascript:">
+				<canvas id=canvasleft></canvas>
+			</a>
+			<a class="vertical up" href="javascript:">
+				<canvas id=canvasup></canvas>
+			</a>
+			<a class="vertical down" href="javascript:">
+				<canvas id=canvasdown></canvas>
+			</a>
+			<a class="horizontal next" href="javascript:">
+				<canvas id=canvasright></canvas>
+			</a>
+		</div>
+	</body>
+</html>
