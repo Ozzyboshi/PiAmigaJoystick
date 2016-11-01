@@ -1,6 +1,23 @@
 var xhttp;
 var keyboardMap;
 
+function jsonCallback(response)
+{
+	$('select').empty();
+	$.each(response, function(gpio, data) 
+	{
+		$('select').append( $('<option></option>').val(gpio).html(gpio+' (pin '+ data.name+')'));
+	});
+	
+	// Set the selected option based on localstorage
+	$.each($('select'), function(val, selectObj) 
+	{
+		var id=$(selectObj).attr('id');
+		var value = localStorage.getItem(id);
+		if (value) $(selectObj).val(value);
+	});
+}
+
 $( document ).ready(function() 
 {
 	initKeyboardMap();
@@ -18,7 +35,16 @@ $( document ).ready(function()
 	
 	$('#connBtn').click(function () 
 	{
-		localStorage.setItem('connBtn',$('#kinput').val());
+		ip=$('#kinput').val();
+		$.ajax({type: "GET",
+			crossDomain : true,
+			url: "http://"+ip+"/listPins",
+			dataType: "jsonp",
+			jsonp: "jsonp",
+			jsonpCallback:"jsonCallback",
+			timeout: 3000
+		}).done(function () {localStorage.setItem('connBtn',$('#kinput').val());alert('Connection succeded');}).fail(function () {alert('Error');}); 
+		
 	});
 	
 	//$('input[type=button]').click(function () 
@@ -30,35 +56,6 @@ $( document ).ready(function()
 		$('.modal-content').find('p').html('Press a new key for '+$('label[for='+buttonId+']').text());
 		document.getElementById('myModal').style.display = "block";
 		$(document).keyup(setChangeKeyHandler);
-	});
-	
-	var GpiosPins = [
-			{
-				gpio:4,
-				pin:7
-			},
-			{
-				gpio:17,
-				pin:11
-			},
-			{
-				gpio:18,
-				pin:12
-			},
-			{
-				gpio:27,
-				pin:13
-			},
-			{
-				gpio:22,
-				pin:15
-			}
-		];
-	
-	// Populate the selection box with pin data
-	$.each(GpiosPins, function(val, text) 
-	{
-		$('select').append( $('<option></option>').val(text.gpio).html(text.gpio+' (pin '+ text.pin+')'));
 	});
 	
 	// Set the selected option based on localstorage
