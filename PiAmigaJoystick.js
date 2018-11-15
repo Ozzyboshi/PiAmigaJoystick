@@ -1,6 +1,9 @@
 var xhttp;
 var keyboardMap;
 
+var AUTOFIRE=0;
+var INTERVALVAR;
+
 function jsonCallback(response)
 {
 	$('select').empty();
@@ -48,7 +51,7 @@ $( document ).ready(function()
 	});
 	
 	//$('input[type=button]').click(function () 
-	$('#keyboardFireBtn,#keyboardLeftBtn,#keyboardRightBtn,#keyboardUpBtn,#keyboardDownBtn').click(function ()
+	$('#keyboardFireBtn,#keyboardLeftBtn,#keyboardRightBtn,#keyboardUpBtn,#keyboardDownBtn,#keyboardAutoFireBtn').click(function ()
 	{
 		$('input[type=button]').attr('lastPressed',false);
 		$(this).attr('lastPressed',true);
@@ -67,7 +70,7 @@ $( document ).ready(function()
 	});
 	
 	// Set the key buttons based on localstorage
-	$.each($('#keyboardFireBtn,#keyboardLeftBtn,#keyboardRightBtn,#keyboardUpBtn,#keyboardDownBtn' ), function(val, selectObj)
+	$.each($('#keyboardFireBtn,#keyboardLeftBtn,#keyboardRightBtn,#keyboardUpBtn,#keyboardDownBtn,#keyboardAutoFireBtn' ), function(val, selectObj)
 	{
 		var id=$(selectObj).attr('id');
 		var value = localStorage.getItem(id);
@@ -117,6 +120,37 @@ function khandle(e)
 	{
 		handleCommand(evt,$('#canvasdown'),$('#pindown'));
 	}
+	if ( e.keyCode==$('#keyboardAutoFireBtn').attr('keyCode') )
+	{
+		if (evt.startsWith("keydown"))
+		{
+			//simulateKeypress("Z");
+			if (AUTOFIRE==0)
+			{
+				console.log("Autofire ON");
+				INTERVALVAR=setInterval(function(){ 
+					handleCommand('keydown',$('#firecanvas'),$('#pinfuoco')); 
+					
+					sleep(25).then(() => {
+						handleCommand('keyup',$('#firecanvas'),$('#pinfuoco'));					
+					}); 
+				}, 50);
+				handleCommand(evt,$('#firecanvas'),$('#pinfuoco'));		
+				AUTOFIRE=1;			
+			}
+			
+		}
+		else 
+		{			
+			clearInterval(INTERVALVAR);
+			AUTOFIRE=0;		
+			console.log("Autofire OFF");					
+		}
+	}
+}
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function handleCommand(evt,canvas,selectBox)

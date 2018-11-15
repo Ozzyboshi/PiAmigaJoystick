@@ -3,6 +3,10 @@ body
 	color: white;
 	font-weight: bold;
 }
+ul 
+{
+	width: 100%;
+}
 #setup,#keyboardassignments,#connData
 {
 	width:20%;
