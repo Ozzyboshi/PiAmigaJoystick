@@ -94,6 +94,15 @@ $( document ).ready(function()
 		localStorage.setItem($(this).attr('id'), $(this).val());
 		$(this).blur();
 	});
+
+	var slider = document.getElementById("keyboardAutoFireBtnRange");
+	var output = document.getElementById("output");
+	output.innerHTML = slider.value; // Display the default slider value
+
+	// Update the current slider value (each time you drag the slider handle)
+	slider.oninput = function() {
+    	output.innerHTML = this.value;
+	}
 });
 
 function khandle(e) 
@@ -124,17 +133,17 @@ function khandle(e)
 	{
 		if (evt.startsWith("keydown"))
 		{
-			//simulateKeypress("Z");
 			if (AUTOFIRE==0)
 			{
-				console.log("Autofire ON");
+				var autofireRate=$("#keyboardAutoFireBtnRange").val()*1;
+				console.log("Autofire ON at "+autofireRate);
 				INTERVALVAR=setInterval(function(){ 
 					handleCommand('keydown',$('#firecanvas'),$('#pinfuoco')); 
 					
-					sleep(25).then(() => {
+					sleep(autofireRate/2).then(() => {
 						handleCommand('keyup',$('#firecanvas'),$('#pinfuoco'));					
 					}); 
-				}, 50);
+				}, autofireRate);
 				handleCommand(evt,$('#firecanvas'),$('#pinfuoco'));		
 				AUTOFIRE=1;			
 			}
